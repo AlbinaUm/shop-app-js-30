@@ -1,6 +1,6 @@
 import express from "express";
 import auth from "../../middleware/auth";
-import permit from "../../middleware/permit";
+import permit from "../../middleware/permit/permit";
 import productsAdminRouter from "./products";
 
 const adminRouter = express.Router();

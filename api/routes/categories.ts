@@ -2,7 +2,7 @@ import express from "express";
 import Category from "../models/Category";
 import {Error} from "mongoose";
 import auth from "../middleware/auth";
-import permit from "../middleware/permit";
+import permit from "../middleware/permit/permit";
 
 const categoriesRouter = express.Router();
 

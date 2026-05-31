@@ -1,4 +1,4 @@
-import {RequestWithUser} from "./auth";
+import {RequestWithUser} from "../auth";
 import {NextFunction, Request, Response} from "express";
 
 
