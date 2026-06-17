@@ -40,6 +40,6 @@ export const createProduct = createAsyncThunk<void, ProductMutation>(
             }
         });
 
-        await axiosApi.post('/products', formData);
+        await axiosApi.post('/admin/products', formData);
     }
 );
