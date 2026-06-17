@@ -5,7 +5,7 @@ const rootPath = __dirname;
 const config = {
   rootPath,
   publicPath: path.join(rootPath, 'public'),
-  db: 'mongodb://localhost/shop-js-30',
+  db: 'mongodb://shop-mongo-db:27017/shop',
   jwtSecret: process.env.JWT_SECRET || 'secret',
   refreshSecret: process.env.REFRESH_SECRET || 'secret',
   clientID: process.env.CLIENT_ID || '...',

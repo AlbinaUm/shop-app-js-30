@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon index.ts",
     "seed": "ts-node fixtures.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
