@@ -58,7 +58,7 @@ const Login = () => {
                     <LockOpenIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in 123
+                    Sign in
                 </Typography>
 
                 {error && (<Alert severity='error' sx={{mt: 3, width: '100%'}}>

@@ -35,9 +35,7 @@ jobs:
             VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }}
             EOF
             
-            # 4. Принудительная сборка без использования старого кэша
-            # Это решит проблему с nginx.conf
-            docker compose build --no-cache
+            docker compose build
             
             # 5. Перезапуск контейнеров
             docker compose up -d
