@@ -16,7 +16,7 @@ const port = 8000;
 
 
 app.use(cors({
-    origin: 'http://46.101.23.59',
+    origin: process.env.URL_CORS || 'secret',
     credentials: true,
 }));
 app.use(cookieParser());
