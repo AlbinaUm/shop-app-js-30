@@ -9,38 +9,35 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Copy files
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          source: '.'
-          target: '/home/${{ secrets.SSH_USER }}/shop_admin/shop-app-js-30'
-
-      - name: Deploy
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            # 1. Переходим в папку проекта
             cd /home/${{ secrets.SSH_USER }}/shop_admin/shop-app-js-30
-            git pull
             
+            # 2. Скачиваем свежий код из репозитория
+            git fetch --all
+            git reset --hard origin/main
+            
+            # 3. Обновляем .env файл
             cat <<EOF > .env
-              MONGO_DB_URL=mongodb://shop-mongo-db:27017/shop
-              URL_CORS=http://${{ secrets.SSH_HOST }}
-              JWT_SECRET=${{ secrets.JWT_SECRET }}
-              REFRESH_SECRET=${{ secrets.REFRESH_SECRET }}
-              CLIENT_ID=${{ secrets.CLIENT_ID }}
-              CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
-              VITE_API_URL=${{ secrets.VITE_API_URL }}
-              VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+            MONGO_DB_URL=mongodb://shop-mongo-db:27017/shop
+            URL_CORS=http://${{ secrets.SSH_HOST }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            REFRESH_SECRET=${{ secrets.REFRESH_SECRET }}
+            CLIENT_ID=${{ secrets.CLIENT_ID }}
+            CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
+            VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }}
             EOF
             
+            # 4. Принудительная сборка без использования старого кэша
+            # Это решит проблему с nginx.conf
+            docker compose build --no-cache
             
-            docker compose up -d --build
+            # 5. Перезапуск контейнеров
+            docker compose up -d
