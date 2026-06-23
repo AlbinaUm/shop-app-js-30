@@ -17,7 +17,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             # 1. Переходим в папку проекта
-            cd /home/${{ secrets.SSH_USER }}/shop_admin/shop-app-js-30
+            cd /home/${{ secrets.SSH_USER }}/shop-app-js-30
             
             # 2. Скачиваем свежий код из репозитория
             git fetch --all
