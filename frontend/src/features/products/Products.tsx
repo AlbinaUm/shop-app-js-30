@@ -37,16 +37,16 @@ const Products = observer(() => {
                             <ListItemText primary="All products" />
                         </ListItemButton>
                     </ListItem>
-                    {categories && categories.length > 0 && categories.map(category => (
-                        <ListItemButton
-                            key={category._id}
-                            component={NavLink}
-                            to={`/?category=${category._id}`}
-                            selected={categoryQuery === String(category._id)}
-                        >
-                            <ListItemText primary={category.title} />
-                        </ListItemButton>
-                    ))}
+                    {/*{categories && categories.length > 0 && categories.map(category => (*/}
+                    {/*    <ListItemButton*/}
+                    {/*        key={category._id}*/}
+                    {/*        component={NavLink}*/}
+                    {/*        to={`/?category=${category._id}`}*/}
+                    {/*        selected={categoryQuery === String(category._id)}*/}
+                    {/*    >*/}
+                    {/*        <ListItemText primary={category.title} />*/}
+                    {/*    </ListItemButton>*/}
+                    {/*))}*/}
                 </List>
             </Grid>
 
@@ -58,7 +58,7 @@ const Products = observer(() => {
 
                     <Grid container direction="row" spacing={1} justifyContent="space-between">
                         {productsFetchLoading && <CircularProgress />}
-                        {(!productsFetchLoading && products.length === 0) ? <Typography variant='h6'>
+                        {(products.length === 0) ? <Typography variant='h6'>
                            No products yet
                         </Typography> :
                             <>
