@@ -18,10 +18,13 @@ const Products = observer(() => {
     const productsFetchLoading = useAppSelector(selectProductsLoading);
 
     useEffect(() => {
-        dispatch(fetchProducts(categoryQuery));
+        dispatch(fetchCategories());
+    }, [dispatch]);
 
-        if (categories.length === 0)  dispatch(fetchCategories());
-    }, [dispatch, categoryQuery, categories]);
+
+    useEffect(() => {
+        dispatch(fetchProducts(categoryQuery));
+    }, [dispatch, categoryQuery]);
 
     return (
         <Grid container spacing={1} justifyContent="space-between">
@@ -37,16 +40,16 @@ const Products = observer(() => {
                             <ListItemText primary="All products" />
                         </ListItemButton>
                     </ListItem>
-                    {/*{categories && categories.length > 0 && categories.map(category => (*/}
-                    {/*    <ListItemButton*/}
-                    {/*        key={category._id}*/}
-                    {/*        component={NavLink}*/}
-                    {/*        to={`/?category=${category._id}`}*/}
-                    {/*        selected={categoryQuery === String(category._id)}*/}
-                    {/*    >*/}
-                    {/*        <ListItemText primary={category.title} />*/}
-                    {/*    </ListItemButton>*/}
-                    {/*))}*/}
+                    {categories && categories.length > 0 && categories.map(category => (
+                        <ListItemButton
+                            key={category._id}
+                            component={NavLink}
+                            to={`/?category=${category._id}`}
+                            selected={categoryQuery === String(category._id)}
+                        >
+                            <ListItemText primary={category.title} />
+                        </ListItemButton>
+                    ))}
                 </List>
             </Grid>
 
